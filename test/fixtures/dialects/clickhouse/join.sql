@@ -115,3 +115,55 @@ SELECT * FROM (SELECT [1, 2] AS arr, [3, 4] AS arr2) AS t1 ARRAY JOIN arr, arr2;
 SELECT x, y FROM (SELECT [1, 2] AS arr, [3, 4] AS arr2) AS t1 ARRAY JOIN arr AS x, arr2 AS y;
 SELECT *,ch,cg FROM (SELECT 1) ARRAY JOIN ['1','2'] as cg, splitByChar(',','1,2') as ch;
 SELECT * FROM (SELECT [1,2] x) AS t1 ARRAY JOIN t1.*;
+SELECT * FROM (SELECT [1, 2] AS arr) AS t1 ARRAY JOIN arr LEFT JOIN (SELECT 1) foo ON TRUE;
+SELECT * FROM (SELECT [1, 2] AS arr) AS t1 ARRAY JOIN arr, [1, 2] AS arr1 LEFT JOIN (SELECT 1) foo ON TRUE;
+SELECT arr1 FROM (SELECT [1, 2] AS arr) AS t1 ARRAY JOIN arr AS arr1 LEFT JOIN (SELECT 1) foo ON TRUE;
+SELECT * FROM (SELECT [1, 2] AS arr) AS t1 ARRAY JOIN arr WHERE arr = 1;
+SELECT * FROM (SELECT [1, 2] AS arr) AS t1 ARRAY JOIN arr ORDER BY arr DESC;
+SELECT * FROM (SELECT [1, 2] AS arr) AS t1 ARRAY JOIN arr ORDER BY arr ASC LIMIT 10;
+SELECT * FROM (SELECT [1, 2] AS arr) AS t1 ARRAY JOIN arr LIMIT 10;
+SELECT * FROM (SELECT [1, 2] AS arr) AS t1 ARRAY JOIN arr LIMIT 10 OFFSET 5;
+SELECT * FROM (SELECT [1, 2] AS arr) AS t1 ARRAY JOIN arr SETTINGS join_use_nulls = 1;
+SELECT * FROM (SELECT [1, 2] AS arr) AS t1 ARRAY JOIN arr LIMIT 10 SETTINGS join_use_nulls = 1;
+SELECT arr, sum(1) as f_sum FROM (SELECT [1, 2] AS arr) AS t1 ARRAY JOIN arr GROUP BY arr;
+SELECT arr, sum(1) as f_sum FROM (SELECT [1, 2] AS arr) AS t1 ARRAY JOIN arr GROUP BY arr ORDER BY 1;
+SELECT * FROM (SELECT [1, 2] AS arr) AS t1 ARRAY JOIN arr AS arr2 WHERE arr2 = 1;
+SELECT * FROM (SELECT [1, 2] AS arr) AS t1 ARRAY JOIN arr AS arr2 ORDER BY arr2 DESC;
+SELECT * FROM (SELECT [1, 2] AS arr) AS t1 ARRAY JOIN arr AS arr2 ORDER BY arr2 ASC LIMIT 10;
+SELECT * FROM (SELECT [1, 2] AS arr) AS t1 ARRAY JOIN arr AS arr2 LIMIT 10;
+SELECT * FROM (SELECT [1, 2] AS arr) AS t1 ARRAY JOIN arr AS arr2 LIMIT 10 OFFSET 5;
+SELECT * FROM (SELECT [1, 2] AS arr) AS t1 ARRAY JOIN arr AS arr2 SETTINGS join_use_nulls = 1;
+SELECT * FROM (SELECT [1, 2] AS arr) AS t1 ARRAY JOIN arr AS arr2 LIMIT 10 SETTINGS join_use_nulls = 1;
+SELECT arr, sum(1) as f_sum FROM (SELECT [1, 2] AS arr) AS t1 ARRAY JOIN arr GROUP BY arr;
+SELECT arr, sum(1) as f_sum FROM (SELECT [1, 2] AS arr) AS t1 ARRAY JOIN arr GROUP BY arr ORDER BY 1;
+SELECT f2, sum(1) as f_sum FROM (SELECT [1, 2] AS arr) AS t1 ARRAY JOIN arr as f2 GROUP BY f2 ORDER BY f2;
+SELECT
+    f2,
+    n2,
+    f_one,
+    avg(f_two) AS f_two,
+    sum(1) AS f_sum
+FROM
+(
+    SELECT [1, 2] AS arr
+) AS t1
+ARRAY JOIN
+    arr AS f2,
+    [1, 2] AS n
+LEFT ARRAY JOIN [1, 4] AS n2
+CROSS JOIN
+(
+    SELECT 1 AS f_one
+) AS foo
+LEFT JOIN
+(
+    SELECT 2 AS f_two
+) AS bar ON TRUE
+WHERE n2 = 4
+GROUP BY
+    f2,
+    n2,
+    f_one
+ORDER BY f2 ASC
+LIMIT 2
+SETTINGS join_use_nulls = 1;

@@ -3,7 +3,7 @@
 # computed by SQLFluff when running the tests. Please run
 # `python test/generate_parse_fixture_yml.py`  to generate them after adding or
 # altering SQL files.
-_hash: 13787818f29237f6320c00fa239f0cf7be43cbfbe558b40b5c96fc6e3fd77fc9
+_hash: 6bfd6cf3300aa712821b01c389193a3272c04daa59fba8e593696ac786617edb
 file:
 - statement:
     create_materialized_view_statement:
@@ -1393,4 +1393,354 @@ file:
             comparison_operator:
               raw_comparison_operator: '>'
             numeric_literal: '0'
+- statement_terminator: ;
+- statement:
+    create_materialized_view_statement:
+    - keyword: CREATE
+    - keyword: MATERIALIZED
+    - keyword: VIEW
+    - keyword: IF
+    - keyword: NOT
+    - keyword: EXISTS
+    - table_reference:
+      - naked_identifier: default
+      - dot: .
+      - naked_identifier: test_view
+    - view_definer_clause:
+        keyword: DEFINER
+        comparison_operator:
+          raw_comparison_operator: '='
+        naked_identifier: default
+    - keyword: AS
+    - select_statement:
+        select_clause:
+        - keyword: SELECT
+        - select_clause_element:
+            column_reference:
+              naked_identifier: uid
+        - comma: ','
+        - select_clause_element:
+            column_reference:
+              naked_identifier: name
+        - comma: ','
+        - select_clause_element:
+            column_reference:
+              naked_identifier: age
+        from_clause:
+          keyword: FROM
+          from_expression:
+            from_expression_element:
+              table_expression:
+                table_reference:
+                - naked_identifier: default
+                - dot: .
+                - naked_identifier: users
+- statement_terminator: ;
+- statement:
+    create_materialized_view_statement:
+    - keyword: CREATE
+    - keyword: MATERIALIZED
+    - keyword: VIEW
+    - keyword: IF
+    - keyword: NOT
+    - keyword: EXISTS
+    - table_reference:
+      - naked_identifier: default
+      - dot: .
+      - naked_identifier: test_view
+    - view_definer_clause:
+        keyword: DEFINER
+        comparison_operator:
+          raw_comparison_operator: '='
+        naked_identifier: CURRENT_USER
+    - keyword: AS
+    - select_statement:
+        select_clause:
+        - keyword: SELECT
+        - select_clause_element:
+            column_reference:
+              naked_identifier: uid
+        - comma: ','
+        - select_clause_element:
+            column_reference:
+              naked_identifier: name
+        - comma: ','
+        - select_clause_element:
+            column_reference:
+              naked_identifier: age
+        from_clause:
+          keyword: FROM
+          from_expression:
+            from_expression_element:
+              table_expression:
+                table_reference:
+                - naked_identifier: default
+                - dot: .
+                - naked_identifier: users
+- statement_terminator: ;
+- statement:
+    create_materialized_view_statement:
+    - keyword: CREATE
+    - keyword: MATERIALIZED
+    - keyword: VIEW
+    - keyword: IF
+    - keyword: NOT
+    - keyword: EXISTS
+    - table_reference:
+      - naked_identifier: default
+      - dot: .
+      - naked_identifier: test_view
+    - view_sql_security_clause:
+      - keyword: SQL
+      - keyword: SECURITY
+      - keyword: DEFINER
+    - keyword: AS
+    - select_statement:
+        select_clause:
+        - keyword: SELECT
+        - select_clause_element:
+            column_reference:
+              naked_identifier: uid
+        - comma: ','
+        - select_clause_element:
+            column_reference:
+              naked_identifier: name
+        - comma: ','
+        - select_clause_element:
+            column_reference:
+              naked_identifier: age
+        from_clause:
+          keyword: FROM
+          from_expression:
+            from_expression_element:
+              table_expression:
+                table_reference:
+                - naked_identifier: default
+                - dot: .
+                - naked_identifier: users
+- statement_terminator: ;
+- statement:
+    create_materialized_view_statement:
+    - keyword: CREATE
+    - keyword: MATERIALIZED
+    - keyword: VIEW
+    - keyword: IF
+    - keyword: NOT
+    - keyword: EXISTS
+    - table_reference:
+      - naked_identifier: default
+      - dot: .
+      - naked_identifier: test_view
+    - view_sql_security_clause:
+      - keyword: SQL
+      - keyword: SECURITY
+      - keyword: NONE
+    - keyword: AS
+    - select_statement:
+        select_clause:
+        - keyword: SELECT
+        - select_clause_element:
+            column_reference:
+              naked_identifier: uid
+        - comma: ','
+        - select_clause_element:
+            column_reference:
+              naked_identifier: name
+        - comma: ','
+        - select_clause_element:
+            column_reference:
+              naked_identifier: age
+        from_clause:
+          keyword: FROM
+          from_expression:
+            from_expression_element:
+              table_expression:
+                table_reference:
+                - naked_identifier: default
+                - dot: .
+                - naked_identifier: users
+- statement_terminator: ;
+- statement:
+    create_materialized_view_statement:
+    - keyword: CREATE
+    - keyword: MATERIALIZED
+    - keyword: VIEW
+    - keyword: IF
+    - keyword: NOT
+    - keyword: EXISTS
+    - table_reference:
+      - naked_identifier: default
+      - dot: .
+      - naked_identifier: test_view
+    - view_definer_clause:
+        keyword: DEFINER
+        comparison_operator:
+          raw_comparison_operator: '='
+        naked_identifier: default
+    - view_sql_security_clause:
+      - keyword: SQL
+      - keyword: SECURITY
+      - keyword: DEFINER
+    - keyword: AS
+    - select_statement:
+        select_clause:
+        - keyword: SELECT
+        - select_clause_element:
+            column_reference:
+              naked_identifier: uid
+        - comma: ','
+        - select_clause_element:
+            column_reference:
+              naked_identifier: name
+        - comma: ','
+        - select_clause_element:
+            column_reference:
+              naked_identifier: age
+        from_clause:
+          keyword: FROM
+          from_expression:
+            from_expression_element:
+              table_expression:
+                table_reference:
+                - naked_identifier: default
+                - dot: .
+                - naked_identifier: users
+- statement_terminator: ;
+- statement:
+    create_materialized_view_statement:
+    - keyword: CREATE
+    - keyword: MATERIALIZED
+    - keyword: VIEW
+    - keyword: IF
+    - keyword: NOT
+    - keyword: EXISTS
+    - table_reference:
+      - naked_identifier: default
+      - dot: .
+      - naked_identifier: test_view
+    - view_definer_clause:
+        keyword: DEFINER
+        comparison_operator:
+          raw_comparison_operator: '='
+        naked_identifier: default
+    - view_sql_security_clause:
+      - keyword: SQL
+      - keyword: SECURITY
+      - keyword: NONE
+    - keyword: AS
+    - select_statement:
+        select_clause:
+        - keyword: SELECT
+        - select_clause_element:
+            column_reference:
+              naked_identifier: uid
+        - comma: ','
+        - select_clause_element:
+            column_reference:
+              naked_identifier: name
+        - comma: ','
+        - select_clause_element:
+            column_reference:
+              naked_identifier: age
+        from_clause:
+          keyword: FROM
+          from_expression:
+            from_expression_element:
+              table_expression:
+                table_reference:
+                - naked_identifier: default
+                - dot: .
+                - naked_identifier: users
+- statement_terminator: ;
+- statement:
+    create_materialized_view_statement:
+    - keyword: CREATE
+    - keyword: MATERIALIZED
+    - keyword: VIEW
+    - keyword: IF
+    - keyword: NOT
+    - keyword: EXISTS
+    - table_reference:
+      - naked_identifier: default
+      - dot: .
+      - naked_identifier: test_view
+    - view_definer_clause:
+        keyword: DEFINER
+        comparison_operator:
+          raw_comparison_operator: '='
+        naked_identifier: CURRENT_USER
+    - view_sql_security_clause:
+      - keyword: SQL
+      - keyword: SECURITY
+      - keyword: DEFINER
+    - keyword: AS
+    - select_statement:
+        select_clause:
+        - keyword: SELECT
+        - select_clause_element:
+            column_reference:
+              naked_identifier: uid
+        - comma: ','
+        - select_clause_element:
+            column_reference:
+              naked_identifier: name
+        - comma: ','
+        - select_clause_element:
+            column_reference:
+              naked_identifier: age
+        from_clause:
+          keyword: FROM
+          from_expression:
+            from_expression_element:
+              table_expression:
+                table_reference:
+                - naked_identifier: default
+                - dot: .
+                - naked_identifier: users
+- statement_terminator: ;
+- statement:
+    create_materialized_view_statement:
+    - keyword: CREATE
+    - keyword: MATERIALIZED
+    - keyword: VIEW
+    - keyword: IF
+    - keyword: NOT
+    - keyword: EXISTS
+    - table_reference:
+      - naked_identifier: default
+      - dot: .
+      - naked_identifier: test_view
+    - view_definer_clause:
+        keyword: DEFINER
+        comparison_operator:
+          raw_comparison_operator: '='
+        naked_identifier: CURRENT_USER
+    - view_sql_security_clause:
+      - keyword: SQL
+      - keyword: SECURITY
+      - keyword: NONE
+    - keyword: AS
+    - select_statement:
+        select_clause:
+        - keyword: SELECT
+        - select_clause_element:
+            column_reference:
+              naked_identifier: uid
+        - comma: ','
+        - select_clause_element:
+            column_reference:
+              naked_identifier: name
+        - comma: ','
+        - select_clause_element:
+            column_reference:
+              naked_identifier: age
+        from_clause:
+          keyword: FROM
+          from_expression:
+            from_expression_element:
+              table_expression:
+                table_reference:
+                - naked_identifier: default
+                - dot: .
+                - naked_identifier: users
 - statement_terminator: ;

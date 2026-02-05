@@ -1275,6 +1275,43 @@ class CreateTableStatementSegment(ansi.CreateTableStatementSegment):
     )
 
 
+class ViewDefinerClauseSegment(BaseSegment):
+    """A `DEFINER` clause.
+
+    https://clickhouse.com/docs/sql-reference/statements/create/view#sql_security
+    """
+
+    type = "view_definer_clause"
+
+    match_grammar: Matchable = Sequence(
+        "DEFINER",
+        Ref("EqualsSegment"),
+        OneOf(
+            Ref("SingleIdentifierGrammar"),
+            "CURRENT_USER",
+        ),
+    )
+
+
+class ViewSQLSecurityClauseSegment(BaseSegment):
+    """A `SQL SECURITY` clause.
+
+    https://clickhouse.com/docs/sql-reference/statements/create/view#sql_security
+    """
+
+    type = "view_sql_security_clause"
+
+    match_grammar: Matchable = Sequence(
+        "SQL",
+        "SECURITY",
+        OneOf(
+            "DEFINER",
+            "INVOKER",
+            "NONE",
+        ),
+    )
+
+
 class CreateViewStatementSegment(BaseSegment):
     """A `CREATE VIEW` statement.
 
@@ -1290,6 +1327,8 @@ class CreateViewStatementSegment(BaseSegment):
         Ref("IfNotExistsGrammar", optional=True),
         Ref("TableReferenceSegment"),
         Ref("OnClusterClauseSegment", optional=True),
+        Ref("ViewDefinerClauseSegment", optional=True),
+        Ref("ViewSQLSecurityClauseSegment", optional=True),
         "AS",
         Ref("SelectableGrammar"),
         Ref("TableEndClauseSegment", optional=True),
@@ -1341,6 +1380,14 @@ class CreateMaterializedViewStatementSegment(BaseSegment):
                 Ref("SettingsClauseSegment", optional=True),
                 Sequence("POPULATE", optional=True),
             ),
+            optional=True,
+        ),
+        Ref("ViewDefinerClauseSegment", optional=True),
+        Ref(
+            "ViewSQLSecurityClauseSegment",
+            optional=True,
+            # SQL SECURITY INVOKER can't be specified for MATERIALIZED VIEW.
+            exclude=Sequence("SQL", "SECURITY", "INVOKER"),
         ),
         "AS",
         Ref("SelectableGrammar"),

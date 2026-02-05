@@ -218,3 +218,67 @@ SELECT
     _error AS error
 FROM db.kafka
 WHERE length(_error) > 0;
+
+CREATE MATERIALIZED VIEW IF NOT EXISTS default.test_view
+DEFINER = default
+AS SELECT
+    uid,
+    name,
+    age
+FROM default.users;
+
+CREATE MATERIALIZED VIEW IF NOT EXISTS default.test_view
+DEFINER = CURRENT_USER
+AS SELECT
+    uid,
+    name,
+    age
+FROM default.users;
+
+CREATE MATERIALIZED VIEW IF NOT EXISTS default.test_view
+SQL SECURITY DEFINER
+AS SELECT
+    uid,
+    name,
+    age
+FROM default.users;
+
+CREATE MATERIALIZED VIEW IF NOT EXISTS default.test_view
+SQL SECURITY NONE
+AS SELECT
+    uid,
+    name,
+    age
+FROM default.users;
+
+CREATE MATERIALIZED VIEW IF NOT EXISTS default.test_view
+DEFINER = default SQL SECURITY DEFINER
+AS SELECT
+    uid,
+    name,
+    age
+FROM default.users;
+
+CREATE MATERIALIZED VIEW IF NOT EXISTS default.test_view
+DEFINER = default SQL SECURITY NONE
+AS SELECT
+    uid,
+    name,
+    age
+FROM default.users;
+
+CREATE MATERIALIZED VIEW IF NOT EXISTS default.test_view
+DEFINER = CURRENT_USER SQL SECURITY DEFINER
+AS SELECT
+    uid,
+    name,
+    age
+FROM default.users;
+
+CREATE MATERIALIZED VIEW IF NOT EXISTS default.test_view
+DEFINER = CURRENT_USER SQL SECURITY NONE
+AS SELECT
+    uid,
+    name,
+    age
+FROM default.users;

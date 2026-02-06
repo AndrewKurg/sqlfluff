@@ -92,6 +92,11 @@ clickhouse_dialect.add(
         type="quoted_identifier",
     ),
     LambdaFunctionSegment=TypedParser("lambda", SymbolSegment, type="lambda"),
+    # https://clickhouse.com/docs/sql-reference/functions/string-search-functions#match
+    RegexpExpressionGrammar=Sequence(
+        "REGEXP",
+        Ref("Tail_Recurse_Expression_A_Grammar"),
+    ),
 )
 
 clickhouse_dialect.replace(
@@ -287,6 +292,55 @@ clickhouse_dialect.replace(
         Ref.keyword("COLUMN"),
         Ref("IfExistsGrammar", optional=True),
         Ref("SingleIdentifierGrammar"),
+    ),
+    # Copied from ANSI dialect, because it is impossible
+    # to add Matchable elements inside Sequence(AnyNumberOf(OneOf(...)))
+    # using get_grammar()
+    Expression_A_Grammar=Sequence(
+        # Grammar always starts with optional unary operator, plus c_expr.  This
+        # section must always match the tail recurse grammar.
+        Ref("Tail_Recurse_Expression_A_Grammar"),
+        # As originally pictured in the diagram, the grammar then repeats itself
+        # for any number of times with a loop.
+        AnyNumberOf(
+            OneOf(
+                # This corresponds to the big repeating block in the diagram that
+                # has like dozens and dozens of possibilities.  Some of them are
+                # recursive.  If the item __ends__ with a recursive call to "a_expr",
+                # use Ref("Tail_Recurse_Expression_A_Grammar") instead so that the
+                # stack depth can be minimized.  If the item has a recursive call
+                # in the middle of the expression, you'll need to recurse
+                # Expression_A_Grammar normally.
+                #
+                # We need to add a lot more here...
+                Ref("LikeExpressionGrammar"),
+                Ref("RegexpExpressionGrammar"),
+                Sequence(
+                    Ref("BinaryOperatorGrammar"),
+                    Ref("Tail_Recurse_Expression_A_Grammar"),
+                ),
+                Ref("InOperatorGrammar"),
+                Sequence(
+                    "IS",
+                    Ref.keyword("NOT", optional=True),
+                    Ref("IsClauseGrammar"),
+                ),
+                Ref("IsNullGrammar"),
+                Ref("NotNullGrammar"),
+                Ref("CollateGrammar"),
+                Sequence(
+                    Ref.keyword("NOT", optional=True),
+                    "BETWEEN",
+                    Ref("Expression_B_Grammar"),
+                    "AND",
+                    Ref("Tail_Recurse_Expression_A_Grammar"),
+                ),
+                Sequence(
+                    Ref("PatternMatchingGrammar"),
+                    Ref("Expression_A_Grammar"),
+                ),
+            ),
+        ),
     ),
 )
 

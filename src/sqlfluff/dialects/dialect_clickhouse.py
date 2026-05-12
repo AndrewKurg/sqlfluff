@@ -264,14 +264,16 @@ clickhouse_dialect.replace(
     ),
     SelectClauseTerminatorGrammar=ansi_dialect.get_grammar(
         "SelectClauseTerminatorGrammar"
-    ).copy(
+    )
+    .copy(
         insert=[
             Ref.keyword("PREWHERE"),
             Ref.keyword("INTO"),
             Ref.keyword("FORMAT"),
         ],
         before=Ref.keyword("WHERE"),
-    ),
+    )
+    .copy(insert=[Ref("SettingsClauseSegment")]),
     FromClauseTerminatorGrammar=ansi_dialect.get_grammar("FromClauseTerminatorGrammar")
     .copy(
         insert=[
@@ -512,9 +514,25 @@ class SelectStatementSegment(ansi.SelectStatementSegment):
 class UnorderedSelectStatementSegment(ansi.UnorderedSelectStatementSegment):
     """Enhance unordered `SELECT` statement to include QUALIFY."""
 
-    match_grammar = ansi.UnorderedSelectStatementSegment.match_grammar.copy(
-        insert=[Ref("PreWhereClauseSegment", optional=True)],
-        before=Ref("WhereClauseSegment", optional=True),
+    match_grammar = (
+        ansi.UnorderedSelectStatementSegment.match_grammar.copy(
+            insert=[Ref("PreWhereClauseSegment", optional=True)],
+            before=Ref("WhereClauseSegment", optional=True),
+        )
+        .copy(
+            insert=[Ref("OrderByClauseSegment", optional=True)],
+            before=Ref("OverlapsClauseSegment", optional=True),
+        )
+        .copy(
+            insert=[Ref("SettingsClauseSegment", optional=True)],
+            replace_terminators=True,
+            terminators=[
+                Ref("SetOperatorSegment"),
+                Ref("WithNoSchemaBindingClauseSegment"),
+                Ref("WithDataClauseSegment"),
+                Ref("LimitClauseSegment"),
+            ],
+        )
     )
 
 

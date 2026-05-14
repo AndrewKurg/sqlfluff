@@ -1,2 +1,2 @@
-git format-patch -o patches -n -U5 old_main..HEAD --relative=src -- src/sqlfluff/dialects/
-for file in patches/*; do patch --no-backup-if-mismatch -p1 --directory=venv/lib/python3.13/site-packages < "$file"; done
+git format-patch -o patches -n -U old_main..HEAD --relative=src/sqlfluff -- src/sqlfluff/dialects/
+for file in patches/*; do patch --no-backup-if-mismatch -p1 --directory=venv/lib/python3.13/site-packages/sqlfluff < "$file"; done

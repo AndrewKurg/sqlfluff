@@ -1,2 +1,2 @@
-git format-patch -o patches -n -U old_main..HEAD --relative=src/sqlfluff -- src/sqlfluff/dialects/
+git format-patch -o patches -n -U old_main..HEAD --relative=src/sqlfluff -- src/sqlfluff/dialects/ && sed -i 's| Kurgansky Andrey <andrewkurg@gmail.com>||g' patches/*
 for file in patches/*; do patch --no-backup-if-mismatch -p1 --directory=venv/lib/python3.13/site-packages/sqlfluff < "$file"; done

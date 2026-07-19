@@ -1046,6 +1046,15 @@ class AliasExpressionSegment(ansi.AliasExpressionSegment):
                 "LATERAL",
                 "WINDOW",
                 "KEYS",
+                # These keywords have to be excluded in order to
+                # make ARRAY JOIN work properly.
+                # See test/fixtures/dialects/clickhouse/join.sql for test cases
+                OneOf(
+                    "WHERE",
+                    Sequence("GROUP", "BY"),
+                    "LIMIT",
+                    "SETTINGS",
+                ),
             ),
         ),
         Dedent,

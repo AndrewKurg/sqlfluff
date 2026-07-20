@@ -606,6 +606,7 @@ class MergeTreesOrderByClauseSegment(BaseSegment):
     match_grammar: Matchable = Sequence(
         "ORDER",
         "BY",
+        Indent,
         OneOf(
             Sequence(
                 "TUPLE",
@@ -619,6 +620,7 @@ class MergeTreesOrderByClauseSegment(BaseSegment):
             ),
             Ref("ColumnReferenceSegment"),
         ),
+        Dedent,
     )
 
 
@@ -648,6 +650,7 @@ class SettingsClauseSegment(BaseSegment):
     type = "settings_clause"
     match_grammar: Matchable = Sequence(
         "SETTINGS",
+        Indent,
         Delimited(
             Sequence(
                 Ref("NakedIdentifierSegment"),
@@ -661,6 +664,7 @@ class SettingsClauseSegment(BaseSegment):
                 optional=True,
             ),
         ),
+        Dedent,
         optional=True,
     )
 

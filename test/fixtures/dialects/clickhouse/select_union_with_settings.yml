@@ -3,7 +3,7 @@
 # computed by SQLFluff when running the tests. Please run
 # `python test/generate_parse_fixture_yml.py`  to generate them after adding or
 # altering SQL files.
-_hash: 07d672c7dc8db1642be43749fe784f1c3257843cf79edafdacc52792e1d38dca
+_hash: e810b0db927cc227a3feff0a7fcefef8b9ef46781229d24aaffe7a396a9ed80e
 file:
 - statement:
     set_expression:
@@ -38,12 +38,12 @@ file:
               table_expression:
                 table_reference:
                   naked_identifier: test2
-    - settings_clause:
-        keyword: SETTINGS
-        naked_identifier: allow_experimental_window_functions
-        comparison_operator:
-          raw_comparison_operator: '='
-        numeric_literal: '1'
+        settings_clause:
+          keyword: SETTINGS
+          naked_identifier: allow_experimental_window_functions
+          comparison_operator:
+            raw_comparison_operator: '='
+          numeric_literal: '1'
 - statement_terminator: ;
 - statement:
     set_expression:
@@ -95,17 +95,17 @@ file:
               table_expression:
                 table_reference:
                   naked_identifier: test3
-    - settings_clause:
-      - keyword: SETTINGS
-      - naked_identifier: max_threads
-      - comparison_operator:
-          raw_comparison_operator: '='
-      - numeric_literal: '4'
-      - comma: ','
-      - naked_identifier: allow_experimental_window_functions
-      - comparison_operator:
-          raw_comparison_operator: '='
-      - numeric_literal: '1'
+        settings_clause:
+        - keyword: SETTINGS
+        - naked_identifier: max_threads
+        - comparison_operator:
+            raw_comparison_operator: '='
+        - numeric_literal: '4'
+        - comma: ','
+        - naked_identifier: allow_experimental_window_functions
+        - comparison_operator:
+            raw_comparison_operator: '='
+        - numeric_literal: '1'
 - statement_terminator: ;
 - statement:
     set_expression:
@@ -200,13 +200,412 @@ file:
           keyword: SELECT
           select_clause_element:
             numeric_literal: '2'
-    - settings_clause:
-        keyword: SETTINGS
-        naked_identifier: max_threads
-        comparison_operator:
-          raw_comparison_operator: '='
-        numeric_literal: '1'
+        settings_clause:
+          keyword: SETTINGS
+          naked_identifier: max_threads
+          comparison_operator:
+            raw_comparison_operator: '='
+          numeric_literal: '1'
     - into_outfile_clause:
       - keyword: INTO
       - keyword: OUTFILE
       - quoted_literal: "'output.csv'"
+- statement_terminator: ;
+- statement:
+    set_expression:
+    - select_statement:
+        select_clause:
+        - keyword: SELECT
+        - select_clause_element:
+            column_reference:
+              naked_identifier: field_1
+        - comma: ','
+        - select_clause_element:
+            column_reference:
+              naked_identifier: field_2
+        from_clause:
+          keyword: FROM
+          from_expression:
+            from_expression_element:
+              table_expression:
+                table_reference:
+                - naked_identifier: test
+                - dot: .
+                - naked_identifier: test_table_1
+        settings_clause:
+          keyword: SETTINGS
+          naked_identifier: allow_experimental_analyzer
+          comparison_operator:
+            raw_comparison_operator: '='
+          numeric_literal: '1'
+    - set_operator:
+      - keyword: UNION
+      - keyword: DISTINCT
+    - select_statement:
+        select_clause:
+        - keyword: SELECT
+        - select_clause_element:
+            column_reference:
+              naked_identifier: field_1
+        - comma: ','
+        - select_clause_element:
+            column_reference:
+              naked_identifier: field_2
+        from_clause:
+          keyword: FROM
+          from_expression:
+            from_expression_element:
+              table_expression:
+                table_reference:
+                - naked_identifier: test
+                - dot: .
+                - naked_identifier: test_table_1
+        settings_clause:
+          keyword: SETTINGS
+          naked_identifier: allow_experimental_analyzer
+          comparison_operator:
+            raw_comparison_operator: '='
+          numeric_literal: '1'
+- statement_terminator: ;
+- statement:
+    set_expression:
+    - select_statement:
+        select_clause:
+          keyword: SELECT
+          select_clause_element:
+            function:
+              function_name:
+                function_name_identifier: now
+              function_contents:
+                bracketed:
+                  start_bracket: (
+                  end_bracket: )
+        settings_clause:
+          keyword: SETTINGS
+          naked_identifier: allow_experimental_analyzer
+          comparison_operator:
+            raw_comparison_operator: '='
+          numeric_literal: '1'
+    - set_operator:
+      - keyword: UNION
+      - keyword: ALL
+    - select_statement:
+        select_clause:
+          keyword: SELECT
+          select_clause_element:
+            function:
+              function_name:
+                function_name_identifier: now
+              function_contents:
+                bracketed:
+                  start_bracket: (
+                  end_bracket: )
+- statement_terminator: ;
+- statement:
+    set_expression:
+    - select_statement:
+        select_clause:
+        - keyword: SELECT
+        - select_clause_element:
+            column_reference:
+              naked_identifier: field_1
+        - comma: ','
+        - select_clause_element:
+            column_reference:
+              naked_identifier: field_2
+        from_clause:
+          keyword: FROM
+          from_expression:
+            from_expression_element:
+              table_expression:
+                table_reference:
+                - naked_identifier: test
+                - dot: .
+                - naked_identifier: test_table_1
+        orderby_clause:
+        - keyword: ORDER
+        - keyword: BY
+        - numeric_literal: '1'
+        settings_clause:
+          keyword: SETTINGS
+          naked_identifier: allow_experimental_analyzer
+          comparison_operator:
+            raw_comparison_operator: '='
+          numeric_literal: '1'
+    - set_operator:
+      - keyword: UNION
+      - keyword: DISTINCT
+    - select_statement:
+        select_clause:
+        - keyword: SELECT
+        - select_clause_element:
+            column_reference:
+              naked_identifier: field_1
+        - comma: ','
+        - select_clause_element:
+            column_reference:
+              naked_identifier: field_2
+        from_clause:
+          keyword: FROM
+          from_expression:
+            from_expression_element:
+              table_expression:
+                table_reference:
+                - naked_identifier: test
+                - dot: .
+                - naked_identifier: test_table_1
+        orderby_clause:
+        - keyword: ORDER
+        - keyword: BY
+        - numeric_literal: '2'
+        settings_clause:
+          keyword: SETTINGS
+          naked_identifier: allow_experimental_analyzer
+          comparison_operator:
+            raw_comparison_operator: '='
+          numeric_literal: '1'
+- statement_terminator: ;
+- statement:
+    set_expression:
+    - select_statement:
+        select_clause:
+          keyword: SELECT
+          select_clause_element:
+            function:
+              function_name:
+                function_name_identifier: now
+              function_contents:
+                bracketed:
+                  start_bracket: (
+                  end_bracket: )
+    - set_operator:
+      - keyword: UNION
+      - keyword: ALL
+    - select_statement:
+        select_clause:
+          keyword: SELECT
+          select_clause_element:
+            function:
+              function_name:
+                function_name_identifier: now
+              function_contents:
+                bracketed:
+                  start_bracket: (
+                  end_bracket: )
+        settings_clause:
+          keyword: SETTINGS
+          naked_identifier: allow_experimental_analyzer
+          comparison_operator:
+            raw_comparison_operator: '='
+          numeric_literal: '1'
+- statement_terminator: ;
+- statement:
+    set_expression:
+    - select_statement:
+        select_clause:
+          keyword: SELECT
+          select_clause_element:
+            function:
+              function_name:
+                function_name_identifier: now
+              function_contents:
+                bracketed:
+                  start_bracket: (
+                  end_bracket: )
+        from_clause:
+          keyword: FROM
+          from_expression:
+            from_expression_element:
+              table_expression:
+                table_reference:
+                - naked_identifier: system
+                - dot: .
+                - naked_identifier: one
+    - set_operator:
+      - keyword: UNION
+      - keyword: DISTINCT
+    - select_statement:
+        select_clause:
+          keyword: SELECT
+          select_clause_element:
+            function:
+              function_name:
+                function_name_identifier: now
+              function_contents:
+                bracketed:
+                  start_bracket: (
+                  end_bracket: )
+        settings_clause:
+          keyword: SETTINGS
+          naked_identifier: allow_experimental_analyzer
+          comparison_operator:
+            raw_comparison_operator: '='
+          numeric_literal: '1'
+- statement_terminator: ;
+- statement:
+    set_expression:
+    - select_statement:
+        select_clause:
+        - keyword: SELECT
+        - select_clause_element:
+            column_reference:
+              naked_identifier: field_1
+        - comma: ','
+        - select_clause_element:
+            column_reference:
+              naked_identifier: field_2
+        from_clause:
+          keyword: FROM
+          from_expression:
+            from_expression_element:
+              table_expression:
+                table_reference:
+                - naked_identifier: test
+                - dot: .
+                - naked_identifier: test_table_1
+        where_clause:
+          keyword: WHERE
+          expression:
+          - column_reference:
+              naked_identifier: field_2
+          - keyword: IS
+          - keyword: NOT
+          - null_literal: 'NULL'
+        orderby_clause:
+        - keyword: ORDER
+        - keyword: BY
+        - column_reference:
+            naked_identifier: field_2
+        - keyword: DESC
+        settings_clause:
+          keyword: SETTINGS
+          naked_identifier: allow_experimental_analyzer
+          comparison_operator:
+            raw_comparison_operator: '='
+          numeric_literal: '1'
+    - set_operator:
+      - keyword: UNION
+      - keyword: DISTINCT
+    - select_statement:
+        select_clause:
+        - keyword: SELECT
+        - select_clause_element:
+            column_reference:
+              naked_identifier: field_1
+        - comma: ','
+        - select_clause_element:
+            function:
+              function_name:
+                function_name_identifier: SUM
+              function_contents:
+                bracketed:
+                  start_bracket: (
+                  expression:
+                    column_reference:
+                      naked_identifier: field_2
+                  end_bracket: )
+            alias_expression:
+              alias_operator:
+                keyword: AS
+              naked_identifier: field_2
+        from_clause:
+          keyword: FROM
+          from_expression:
+            from_expression_element:
+              table_expression:
+                table_reference:
+                - naked_identifier: test
+                - dot: .
+                - naked_identifier: test_table_1
+        groupby_clause:
+        - keyword: GROUP
+        - keyword: BY
+        - column_reference:
+            naked_identifier: field_1
+        having_clause:
+          keyword: HAVING
+          expression:
+            column_reference:
+              naked_identifier: field_2
+            comparison_operator:
+              raw_comparison_operator: '>'
+            numeric_literal: '100'
+        settings_clause:
+          keyword: SETTINGS
+          naked_identifier: allow_experimental_analyzer
+          comparison_operator:
+            raw_comparison_operator: '='
+          numeric_literal: '1'
+- statement_terminator: ;
+- statement:
+    set_expression:
+    - select_statement:
+        select_clause:
+        - keyword: SELECT
+        - select_clause_element:
+            column_reference:
+              naked_identifier: field_1
+        - comma: ','
+        - select_clause_element:
+            column_reference:
+              naked_identifier: field_2
+        from_clause:
+          keyword: FROM
+          from_expression:
+            from_expression_element:
+              table_expression:
+                table_reference:
+                - naked_identifier: test
+                - dot: .
+                - naked_identifier: test_table_1
+    - set_operator:
+      - keyword: UNION
+      - keyword: ALL
+    - select_statement:
+        select_clause:
+        - keyword: SELECT
+        - select_clause_element:
+            column_reference:
+              naked_identifier: field_1
+        - comma: ','
+        - select_clause_element:
+            column_reference:
+              naked_identifier: field_2
+        from_clause:
+          keyword: FROM
+          from_expression:
+            from_expression_element:
+              table_expression:
+                table_reference:
+                - naked_identifier: test
+                - dot: .
+                - naked_identifier: test_table_2
+    - set_operator:
+      - keyword: UNION
+      - keyword: DISTINCT
+    - select_statement:
+        select_clause:
+        - keyword: SELECT
+        - select_clause_element:
+            column_reference:
+              naked_identifier: field_1
+        - comma: ','
+        - select_clause_element:
+            column_reference:
+              naked_identifier: field_2
+        from_clause:
+          keyword: FROM
+          from_expression:
+            from_expression_element:
+              table_expression:
+                table_reference:
+                - naked_identifier: test
+                - dot: .
+                - naked_identifier: test_table_3
+        settings_clause:
+          keyword: SETTINGS
+          naked_identifier: join_use_null
+          comparison_operator:
+            raw_comparison_operator: '='
+          numeric_literal: '1'
+- statement_terminator: ;

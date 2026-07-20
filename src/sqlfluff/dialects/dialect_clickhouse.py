@@ -2718,6 +2718,7 @@ class StatementSegment(ansi.StatementSegment):
             Ref("SystemStatementSegment"),
             Ref("RenameStatementSegment"),
             Ref("AlterTableStatementSegment"),
+            Ref("ExchangeStatementSegment"),
         ]
     )
 
@@ -2925,4 +2926,28 @@ class TupleElementAccessSegment(BaseSegment):
             allow_gaps=False,
         ),
         allow_gaps=False,
+    )
+
+
+class ExchangeStatementSegment(BaseSegment):
+    """An `EXCHANGE` statement.
+
+    https://clickhouse.com/docs/sql-reference/statements/exchange
+    """
+
+    type = "exchange_statement"
+    match_grammar: Matchable = Sequence(
+        "EXCHANGE",
+        OneOf(
+            "TABLES",
+            "DICTIONARIES",
+        ),
+        Delimited(
+            Sequence(
+                Ref("TableReferenceSegment"),
+                "AND",
+                Ref("TableReferenceSegment"),
+            ),
+        ),
+        Ref("OnClusterClauseSegment", optional=True),
     )

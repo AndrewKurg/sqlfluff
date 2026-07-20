@@ -1,0 +1,207 @@
+# YML test files are auto-generated from SQL files and should not be edited by
+# hand. To help enforce this, the "hash" field in the file must match a hash
+# computed by SQLFluff when running the tests. Please run
+# `python test/generate_parse_fixture_yml.py`  to generate them after adding or
+# altering SQL files.
+_hash: cc6731d94a484cebc8d4b9ea26d86a7fd526df19223b984a3b0df4cef0578a90
+file:
+- statement:
+    exchange_statement:
+    - keyword: EXCHANGE
+    - keyword: TABLES
+    - table_reference:
+        naked_identifier: a
+    - keyword: AND
+    - table_reference:
+        naked_identifier: b
+- statement_terminator: ;
+- statement:
+    exchange_statement:
+    - keyword: EXCHANGE
+    - keyword: TABLES
+    - table_reference:
+      - naked_identifier: default
+      - dot: .
+      - naked_identifier: a
+    - keyword: AND
+    - table_reference:
+      - naked_identifier: default
+      - dot: .
+      - naked_identifier: b
+- statement_terminator: ;
+- statement:
+    exchange_statement:
+    - keyword: EXCHANGE
+    - keyword: TABLES
+    - table_reference:
+        naked_identifier: a
+    - keyword: AND
+    - table_reference:
+        naked_identifier: b
+    - on_cluster_clause:
+      - keyword: 'ON'
+      - keyword: CLUSTER
+      - naked_identifier: test
+- statement_terminator: ;
+- statement:
+    exchange_statement:
+    - keyword: EXCHANGE
+    - keyword: TABLES
+    - table_reference:
+      - naked_identifier: default
+      - dot: .
+      - naked_identifier: a
+    - keyword: AND
+    - table_reference:
+      - naked_identifier: default
+      - dot: .
+      - naked_identifier: b
+    - on_cluster_clause:
+      - keyword: 'ON'
+      - keyword: CLUSTER
+      - naked_identifier: test
+- statement_terminator: ;
+- statement:
+    exchange_statement:
+    - keyword: EXCHANGE
+    - keyword: TABLES
+    - table_reference:
+        naked_identifier: a
+    - keyword: AND
+    - table_reference:
+        naked_identifier: b
+    - comma: ','
+    - table_reference:
+        naked_identifier: c
+    - keyword: AND
+    - table_reference:
+        naked_identifier: d
+- statement_terminator: ;
+- statement:
+    exchange_statement:
+    - keyword: EXCHANGE
+    - keyword: TABLES
+    - table_reference:
+      - naked_identifier: default
+      - dot: .
+      - naked_identifier: a
+    - keyword: AND
+    - table_reference:
+      - naked_identifier: default
+      - dot: .
+      - naked_identifier: b
+    - comma: ','
+    - table_reference:
+      - naked_identifier: default
+      - dot: .
+      - naked_identifier: c
+    - keyword: AND
+    - table_reference:
+      - naked_identifier: default
+      - dot: .
+      - naked_identifier: d
+- statement_terminator: ;
+- statement:
+    exchange_statement:
+    - keyword: EXCHANGE
+    - keyword: TABLES
+    - table_reference:
+        naked_identifier: a
+    - keyword: AND
+    - table_reference:
+        naked_identifier: b
+    - comma: ','
+    - table_reference:
+        naked_identifier: c
+    - keyword: AND
+    - table_reference:
+        naked_identifier: d
+    - on_cluster_clause:
+      - keyword: 'ON'
+      - keyword: CLUSTER
+      - naked_identifier: test
+- statement_terminator: ;
+- statement:
+    exchange_statement:
+    - keyword: EXCHANGE
+    - keyword: TABLES
+    - table_reference:
+      - naked_identifier: default
+      - dot: .
+      - naked_identifier: a
+    - keyword: AND
+    - table_reference:
+      - naked_identifier: default
+      - dot: .
+      - naked_identifier: b
+    - comma: ','
+    - table_reference:
+      - naked_identifier: default
+      - dot: .
+      - naked_identifier: c
+    - keyword: AND
+    - table_reference:
+      - naked_identifier: default
+      - dot: .
+      - naked_identifier: d
+    - on_cluster_clause:
+      - keyword: 'ON'
+      - keyword: CLUSTER
+      - naked_identifier: test
+- statement_terminator: ;
+- statement:
+    exchange_statement:
+    - keyword: EXCHANGE
+    - keyword: DICTIONARIES
+    - table_reference:
+        naked_identifier: a
+    - keyword: AND
+    - table_reference:
+        naked_identifier: b
+- statement_terminator: ;
+- statement:
+    exchange_statement:
+    - keyword: EXCHANGE
+    - keyword: DICTIONARIES
+    - table_reference:
+      - naked_identifier: default
+      - dot: .
+      - naked_identifier: a
+    - keyword: AND
+    - table_reference:
+      - naked_identifier: default
+      - dot: .
+      - naked_identifier: b
+- statement_terminator: ;
+- statement:
+    exchange_statement:
+    - keyword: EXCHANGE
+    - keyword: DICTIONARIES
+    - table_reference:
+        naked_identifier: a
+    - keyword: AND
+    - table_reference:
+        naked_identifier: b
+    - on_cluster_clause:
+      - keyword: 'ON'
+      - keyword: CLUSTER
+      - naked_identifier: test
+- statement_terminator: ;
+- statement:
+    exchange_statement:
+    - keyword: EXCHANGE
+    - keyword: DICTIONARIES
+    - table_reference:
+      - naked_identifier: default
+      - dot: .
+      - naked_identifier: a
+    - keyword: AND
+    - table_reference:
+      - naked_identifier: default
+      - dot: .
+      - naked_identifier: b
+    - on_cluster_clause:
+      - keyword: 'ON'
+      - keyword: CLUSTER
+      - naked_identifier: test
+- statement_terminator: ;
